@@ -1,0 +1,48 @@
+name: Generated Eversend 4 Digits PIN
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_choice:
+        description: 'Description enter balance $0.50 enter your choice'
+        required: true
+        default: '1'
+
+jobs:
+  setup_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system packages sudo apt install
+        run: |
+          sudo apt update
+          sudo apt install -y python3 python3-pip
+
+      - name: To generated Eversend 4 digits pin
+        id: create_pin
+        run: |
+          # Create a 4 digits eversend pin
+          GENERATED_PIN=$(shuf -i 1000-9999 -n 1)
+          echo "Generated PIN is: $GENERATED_PIN"
+          echo "pin=$GENERATED_PIN" >> $GITHUB_OUTPUT
+
+      - name: Check Balance $0.50
+        run: |
+          # Check Balance
+          echo "Account Balance: $0.50"
+
+      - name: Description enter balance $0.50 enter your choice
+        run: |
+          # Capturing the input '1'
+          CHOICE="${{ github.event.inputs.user_choice }}"
+          echo "User selected choice: $CHOICE"
+
+      - name: Post checkout repository complete job
+        run: |
+          # Set up 4 digits eversend pin github actions
+          echo "Job completed successfully."
+
+      - name: Final Status
+        run: echo "Done success enter your choice 1."
